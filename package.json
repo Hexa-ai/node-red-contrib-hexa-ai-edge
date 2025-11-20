@@ -1,6 +1,6 @@
 {
   "name": "@hexa-ai/node-red-contrib-hexa-ai-edge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node-RED node for dataplug-history",
   "keywords": [
     "node-red",
