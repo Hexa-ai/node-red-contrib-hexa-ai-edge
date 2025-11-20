@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Node-RED node for dataplug-history",
   "keywords": [
+    "node-red",
     "node-red-nodegen", 
     "dataplug", 
     "sqlite", 
