@@ -245,7 +245,7 @@
         }
     ],
     "meta": {
-        "module": "node-red-contrib-hexa-ai-edge",
+        "module": "@hexa-ai/node-red-contrib-hexa-ai-edge",
         "type": "dataplug-history",
         "version": "1.0.0",
         "author": "Julien TALBOURDET <contact@hexa-ai.fr>",

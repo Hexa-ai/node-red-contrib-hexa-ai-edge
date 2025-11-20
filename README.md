@@ -1,4 +1,4 @@
-node-red-contrib-hexa-ai-edge
+@hexa-ai/node-red-contrib-hexa-ai-edge
 =====================
 
 Retrieves and aggregates historical data from the SQLite DataPlug database.
