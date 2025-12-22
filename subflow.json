@@ -247,7 +247,7 @@
     "meta": {
         "module": "@hexa-ai/node-red-contrib-hexa-ai-edge",
         "type": "dataplug-history",
-        "version": "1.0.4",
+        "version": "1.0.5",
         "author": "Julien TALBOURDET <contact@hexa-ai.fr>",
         "desc": "Retrieves and aggregates historical data from the SQLite DataPlug database.",
         "keywords": "dataplug, sqlite, min, max, average, history",
@@ -304,12 +304,21 @@
         },
         {
             "id": "88e075c70b6b1c2a",
-            "type": "sqlite",
+            "type": "function",
             "z": "bd128c8517e37ccc",
-            "mydb": "eda2dae8c3b1ab0d",
-            "sqlquery": "msg.topic",
-            "sql": "",
-            "name": "Get Data",
+            "name": "Get Data (SQLite3)",
+            "func": "const path = '/database/data_storage.db';\n\n// Sécurité : Vérifier si la DB existe\ntry {\n    // La variable 'Database' est injectée par Node-RED via l'onglet 'libs'\n    // définie ci-dessous dans le JSON (module: better-sqlite3)\n    const db = new Database(path, { readonly: true, fileMustExist: true });\n\n    // Récupération de la requête préparée précédemment\n    const sql = msg.topic;\n    \n    // Exécution\n    const rows = db.prepare(sql).all();\n    \n    // Fermeture propre\n    db.close();\n\n    // Résultat\n    msg.payload = rows;\n    return msg;\n\n} catch (err) {\n    node.error(\"Erreur SQLite DataPlug : \" + err.message, msg);\n    return null;\n}",
+            "outputs": 1,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [
+                {
+                    "var": "Database",
+                    "module": "better-sqlite3"
+                }
+            ],
             "x": 700,
             "y": 280,
             "wires": [
@@ -340,12 +349,21 @@
         },
         {
             "id": "95c08bdb819e285d",
-            "type": "sqlite",
+            "type": "function",
             "z": "bd128c8517e37ccc",
-            "mydb": "eda2dae8c3b1ab0d",
-            "sqlquery": "msg.topic",
-            "sql": "",
-            "name": "Get Units",
+            "name": "Get Units (SQLite3)",
+            "func": "const path = '/database/data_storage.db';\n\ntry {\n    const db = new Database(path, { readonly: true, fileMustExist: true });\n    const sql = msg.topic;\n    const rows = db.prepare(sql).all();\n    db.close();\n    msg.payload = rows;\n    return msg;\n} catch (err) {\n    node.error(\"Erreur SQLite DataPlug Units : \" + err.message, msg);\n    return null;\n}",
+            "outputs": 1,
+            "timeout": 0,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [
+                {
+                    "var": "Database",
+                    "module": "better-sqlite3"
+                }
+            ],
             "x": 1140,
             "y": 280,
             "wires": [
@@ -371,12 +389,6 @@
             "wires": [
                 []
             ]
-        },
-        {
-            "id": "eda2dae8c3b1ab0d",
-            "type": "sqlitedb",
-            "db": "/database/data_storage.db",
-            "mode": "RO"
         }
     ]
 }
