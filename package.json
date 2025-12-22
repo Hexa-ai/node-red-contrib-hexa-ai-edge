@@ -1,6 +1,6 @@
 {
   "name": "@hexa-ai/node-red-contrib-hexa-ai-edge",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node-RED node for dataplug-history",
   "keywords": [
     "node-red",
@@ -14,6 +14,9 @@
   ],
   "engines": {
     "node": ">=12.0.0"
+  },
+  "dependencies": {
+    "node-red-node-sqlite": "1.1.1"
   },
   "node-red": {
     "version": ">=1.3.7",
