@@ -247,7 +247,7 @@
     "meta": {
         "module": "@hexa-ai/node-red-contrib-hexa-ai-edge",
         "type": "dataplug-history",
-        "version": "1.0.2",
+        "version": "1.0.3",
         "author": "Julien TALBOURDET <contact@hexa-ai.fr>",
         "desc": "Retrieves and aggregates historical data from the SQLite DataPlug database.",
         "keywords": "dataplug, sqlite, min, max, average, history",
