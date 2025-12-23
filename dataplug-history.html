@@ -1,0 +1,92 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dataplug-history',{
+        category: 'analysis',
+        color: '#FFCC66',
+        defaults: {
+            name: {value:""},
+            channels: {value:""},
+            timeRange: {value:"1d"},
+            aggFunc: {value:"AVG"},
+            aggInterval: {value:"%Y-%m-%d %H:%M"},
+            category: {value:"none"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.svg",
+        label: function() {
+            return this.name || "DataPlug History";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="dataplug-history">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-channels"><i class="fa fa-tags"></i> Channels</label>
+        <input type="text" id="node-input-channels" placeholder="ex: Temp1, Pressure2 (comma separated)">
+    </div>
+    <div class="form-row">
+        <label for="node-input-timeRange"><i class="fa fa-clock-o"></i> Time Range</label>
+        <select id="node-input-timeRange">
+            <option value="dynamic">Use input message (msg.payload.from/to)</option>
+            <option value="15m">Last 15 minutes</option>
+            <option value="1h">Last hour</option>
+            <option value="6h">Last 6 hours</option>
+            <option value="12h">Last 12 hours</option>
+            <option value="24h">Last 24 hours</option>
+            <option value="2d">Last 2 days</option>
+            <option value="7d">Last 7 days</option>
+            <option value="30d">Last 30 days</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-aggFunc"><i class="fa fa-calculator"></i> Aggregation</label>
+        <select id="node-input-aggFunc">
+            <option value="AVG">Average</option>
+            <option value="MIN">Minimum</option>
+            <option value="MAX">Maximum</option>
+            <option value="DELTA">Difference (Counters)</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-aggInterval"><i class="fa fa-bar-chart"></i> Interval</label>
+        <select id="node-input-aggInterval">
+            <option value="%Y-%m-%d %H:%M">Per Minute</option>
+            <option value="%Y-%m-%d %H">Per Hour</option>
+            <option value="%Y-%m-%d">Per Day</option>
+            <option value="last">Last Value Only</option>
+            <option value="none">None (Raw Data)</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-category"><i class="fa fa-filter"></i> Category</label>
+        <select id="node-input-category">
+            <option value="none">None</option>
+            <option value="measure">Measure</option>
+            <option value="state">State</option>
+            <option value="counter">Counter</option>
+            <option value="alarm">Alarm</option>
+        </select>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="dataplug-history">
+    <p>Retrieves historical data from the local DataPlug database.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">payload.channels <span class="property-type">array</span></dt>
+        <dd>List of channel names to query.</dd>
+        <dt class="optional">payload.from <span class="property-type">number</span></dt>
+        <dd>Start timestamp (ms) if 'Use input message' is selected.</dd>
+        <dt class="optional">payload.to <span class="property-type">number</span></dt>
+        <dd>End timestamp (ms).</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>An object containing the historical data per channel.</dd>
+    </dl>
+</script>
